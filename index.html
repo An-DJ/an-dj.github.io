@@ -333,10 +333,10 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
     var OriginTitile = document.title, titleTime;
     document.addEventListener('visibilitychange', function() {
         if (document.hidden) {
-            document.title = 'leave！';
+            document.title = 'leave';
             clearTimeout(titleTime);
         } else {
-            document.title = '回!';
+            document.title = 'back';
             titleTime = setTimeout(function() {
                 document.title = OriginTitile;
             },2000);
