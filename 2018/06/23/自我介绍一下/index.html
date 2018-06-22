@@ -27,7 +27,7 @@
 <meta property="og:site_name" content="泡壶Java">
 <meta property="og:description" content="写一写-from AnDJ">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-06-22T09:24:30.386Z">
+<meta property="og:updated_time" content="2018-06-22T09:35:49.155Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自我介绍一下">
 <meta name="twitter:description" content="写一写-from AnDJ">
@@ -195,7 +195,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-06-22T09:24:30.386Z" itemprop="dateUpdated">2018-06-22 09:24:30</time>
+    最后更新时间：<time datetime="2018-06-22T09:35:49.155Z" itemprop="dateUpdated">2018-06-22 09:35:49</time>
 </span><br>
 
 
@@ -300,6 +300,30 @@
 
 
 
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "cKw8onRSaLp3yJpocc8NIP3o-gzGzoHsz",
+            appKey: "VvRtaWv3T4EvOcdJw5VGvtKo",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
 
 
 
