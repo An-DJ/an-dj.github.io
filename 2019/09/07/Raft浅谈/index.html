@@ -27,22 +27,22 @@
 <meta property="og:site_name" content="泡壶Java">
 <meta property="og:description" content="分布式一致性(Distributed Consensus)What 分布式环境：复杂，Some of the processes (agents) may fail or be unreliable in other ways 一致性：requires agreement among a number of processes (or agents) for a single data value">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2019/png/457347/1566956207876-4391d331-854b-4838-ba0c-509fb38ad66c.png#align=left&display=inline&height=293&name=consensus.png&originHeight=293&originWidth=541&size=16535&status=done&width=541">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2019/png/457347/1566958856739-ad3d084f-adbb-4f9f-8b72-641feb93c79a.png#align=left&display=inline&height=247&name=Screenshot%20from%202019-08-28%2010-20-28.png&originHeight=247&originWidth=392&size=37206&status=done&width=392">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2019/png/457347/1566959735657-020ad9e5-bd81-4799-9e6b-2b821b2c0425.png#align=left&display=inline&height=192&name=Screenshot%20from%202019-08-28%2010-35-09.png&originHeight=192&originWidth=441&size=40113&status=done&width=441">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2019/png/457347/1566960157811-627cdd28-df0f-48ab-85f3-665535e71ba7.png#align=left&display=inline&height=169&name=Screenshot%20from%202019-08-28%2010-42-17.png&originHeight=331&originWidth=852&size=35827&status=done&width=435">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2019/png/457347/1566960733697-9f454765-cc85-4a22-89ec-077da45c00d1.png#align=left&display=inline&height=300&name=Screenshot%20from%202019-08-28%2010-51-50.png&originHeight=388&originWidth=408&size=18629&status=done&width=315">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2019/png/457347/1566960788345-5e2216f2-2cb2-48e9-b0d8-b9c86d622a7c.png#align=left&display=inline&height=294&name=Screenshot%20from%202019-08-28%2010-52-47.png&originHeight=380&originWidth=408&size=20270&status=done&width=316">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2019/png/457347/1566960866335-7a29ab44-24f1-4788-a33a-4bc8db303615.png#align=left&display=inline&height=296&name=Screenshot%20from%202019-08-28%2010-54-10.png&originHeight=382&originWidth=408&size=28063&status=done&width=316">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2019/png/457347/1566960928944-efcfd092-bd34-4119-a671-9d96b29c8b59.png#align=left&display=inline&height=292&name=Screenshot%20from%202019-08-28%2010-54-58.png&originHeight=387&originWidth=407&size=27120&status=done&width=307">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2019/png/457347/1566962392234-6838d5b2-0871-4bdb-ba64-6754fa4eb355.png#align=left&display=inline&height=301&name=Screenshot%20from%202019-08-28%2011-19-29.png&originHeight=505&originWidth=666&size=68848&status=done&width=397">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2019/png/457347/1566972043233-beeb4e33-7d42-4ab9-8826-3cf265c68fb1.png#align=left&display=inline&height=290&name=Screenshot%20from%202019-08-28%2014-00-22.png&originHeight=558&originWidth=821&size=74359&status=done&width=426">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2019/png/457347/1566992314754-b2579d0f-201c-4ab1-9fd6-229c1db92786.png#align=left&display=inline&height=218&name=Screenshot%20from%202019-08-28%2019-38-16.png&originHeight=440&originWidth=953&size=72011&status=done&width=472">
-<meta property="og:updated_time" content="2019-09-07T06:21:01.738Z">
+<meta property="og:image" content="http://andj.me/2019/09/07/Raft浅谈/consensus.png">
+<meta property="og:image" content="http://andj.me/2019/09/07/Raft浅谈/replicated_machine.png">
+<meta property="og:image" content="http://andj.me/2019/09/07/Raft浅谈/role.png">
+<meta property="og:image" content="http://andj.me/2019/09/07/Raft浅谈/terms.png">
+<meta property="og:image" content="http://andj.me/2019/09/07/Raft浅谈/progress_1.png">
+<meta property="og:image" content="http://andj.me/2019/09/07/Raft浅谈/progress_2.png">
+<meta property="og:image" content="http://andj.me/2019/09/07/Raft浅谈/progress_3.png">
+<meta property="og:image" content="http://andj.me/2019/09/07/Raft浅谈/progress_4.png">
+<meta property="og:image" content="http://andj.me/2019/09/07/Raft浅谈/leader_copy.png">
+<meta property="og:image" content="http://andj.me/2019/09/07/Raft浅谈/complex.png">
+<meta property="og:image" content="http://andj.me/2019/09/07/Raft浅谈/commit_in_current_term.png">
+<meta property="og:updated_time" content="2019-09-07T09:40:13.899Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Raft浅谈">
 <meta name="twitter:description" content="分布式一致性(Distributed Consensus)What 分布式环境：复杂，Some of the processes (agents) may fail or be unreliable in other ways 一致性：requires agreement among a number of processes (or agents) for a single data value">
-<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2019/png/457347/1566956207876-4391d331-854b-4838-ba0c-509fb38ad66c.png#align=left&display=inline&height=293&name=consensus.png&originHeight=293&originWidth=541&size=16535&status=done&width=541">
+<meta name="twitter:image" content="http://andj.me/2019/09/07/Raft浅谈/consensus.png">
     
         <link rel="alternate" type="application/atom+xml" title="泡壶Java" href="/atom.xml">
     
@@ -213,7 +213,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://cdn.nlark.com/yuque/0/2019/png/457347/1566956207876-4391d331-854b-4838-ba0c-509fb38ad66c.png#align=left&display=inline&height=293&name=consensus.png&originHeight=293&originWidth=541&size=16535&status=done&width=541" alt="分布式一致性图示" title="">
+                    <img src="/2019/09/07/Raft浅谈/consensus.png" alt="分布式一致性图示" title="">
                 </div>
                 <div class="image-caption">分布式一致性图示</div>
             </figure>
@@ -255,7 +255,7 @@
 <h3 id="复制状态机-Replicated-state-machines"><a href="#复制状态机-Replicated-state-machines" class="headerlink" title="复制状态机 Replicated state machines"></a>复制状态机 Replicated state machines</h3><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://cdn.nlark.com/yuque/0/2019/png/457347/1566958856739-ad3d084f-adbb-4f9f-8b72-641feb93c79a.png#align=left&display=inline&height=247&name=Screenshot%20from%202019-08-28%2010-20-28.png&originHeight=247&originWidth=392&size=37206&status=done&width=392" alt="复制状态机" title="">
+                    <img src="/2019/09/07/Raft浅谈/replicated_machine.png" alt="复制状态机" title="">
                 </div>
                 <div class="image-caption">复制状态机</div>
             </figure>  
@@ -272,7 +272,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://cdn.nlark.com/yuque/0/2019/png/457347/1566959735657-020ad9e5-bd81-4799-9e6b-2b821b2c0425.png#align=left&display=inline&height=192&name=Screenshot%20from%202019-08-28%2010-35-09.png&originHeight=192&originWidth=441&size=40113&status=done&width=441" alt="role 状态机" title="">
+                    <img src="/2019/09/07/Raft浅谈/role.png" alt="role 状态机" title="">
                 </div>
                 <div class="image-caption">role 状态机</div>
             </figure>
@@ -284,7 +284,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://cdn.nlark.com/yuque/0/2019/png/457347/1566960157811-627cdd28-df0f-48ab-85f3-665535e71ba7.png#align=left&display=inline&height=169&name=Screenshot%20from%202019-08-28%2010-42-17.png&originHeight=331&originWidth=852&size=35827&status=done&width=435" alt="任期示例" title="">
+                    <img src="/2019/09/07/Raft浅谈/terms.png" alt="任期示例" title="">
                 </div>
                 <div class="image-caption">任期示例</div>
             </figure>
@@ -301,17 +301,17 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://cdn.nlark.com/yuque/0/2019/png/457347/1566960733697-9f454765-cc85-4a22-89ec-077da45c00d1.png#align=left&display=inline&height=300&name=Screenshot%20from%202019-08-28%2010-51-50.png&originHeight=388&originWidth=408&size=18629&status=done&width=315" alt="等待 leader" title="">
+                    <img src="/2019/09/07/Raft浅谈/progress_1.png" alt="等待 leader" title="">
                 </div>
                 <div class="image-caption">等待 leader</div>
             </figure>      
-<p><img src="https://cdn.nlark.com/yuque/0/2019/png/457347/1566960788345-5e2216f2-2cb2-48e9-b0d8-b9c86d622a7c.png#align=left&amp;display=inline&amp;height=294&amp;name=Screenshot%20from%202019-08-28%2010-52-47.png&amp;originHeight=380&amp;originWidth=408&amp;size=20270&amp;status=done&amp;width=316" alt="S1 成为 candidate"><br><figure class="image-bubble">
+<p><img src="/2019/09/07/Raft浅谈/progress_2.png" alt="S1 成为 candidate"><br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://cdn.nlark.com/yuque/0/2019/png/457347/1566960866335-7a29ab44-24f1-4788-a33a-4bc8db303615.png#align=left&display=inline&height=296&name=Screenshot%20from%202019-08-28%2010-54-10.png&originHeight=382&originWidth=408&size=28063&status=done&width=316" alt="投票且 S2 成为 candidate" title="">
+                    <img src="/2019/09/07/Raft浅谈/progress_3.png" alt="投票且 S2 成为 candidate" title="">
                 </div>
                 <div class="image-caption">投票且 S2 成为 candidate</div>
-            </figure><br><img src="https://cdn.nlark.com/yuque/0/2019/png/457347/1566960928944-efcfd092-bd34-4119-a671-9d96b29c8b59.png#align=left&amp;display=inline&amp;height=292&amp;name=Screenshot%20from%202019-08-28%2010-54-58.png&amp;originHeight=387&amp;originWidth=407&amp;size=27120&amp;status=done&amp;width=307" alt="S1 当选为 leader"></p>
+            </figure><br><img src="/2019/09/07/Raft浅谈/progress_4.png" alt="S1 当选为 leader"></p>
 <ul>
 <li><strong>选举 RPC</strong>，会带有部分信息，如任期号</li>
 <li>选举结果：自己是 leader；别的节点是 leader；超时没选出来</li>
@@ -328,7 +328,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://cdn.nlark.com/yuque/0/2019/png/457347/1566962392234-6838d5b2-0871-4bdb-ba64-6754fa4eb355.png#align=left&display=inline&height=301&name=Screenshot%20from%202019-08-28%2011-19-29.png&originHeight=505&originWidth=666&size=68848&status=done&width=397" alt="日志复制" title="">
+                    <img src="/2019/09/07/Raft浅谈/leader_copy.png" alt="日志复制" title="">
                 </div>
                 <div class="image-caption">日志复制</div>
             </figure>
@@ -344,13 +344,14 @@
 <li>如果在不同的日志中的两个条目拥有相同的索引和任期号，那么他们之前的所有日志条目也全部相同</li>
 </ul>
 <h4 id="leader-崩溃带来的问题"><a href="#leader-崩溃带来的问题" class="headerlink" title="leader 崩溃带来的问题"></a>leader 崩溃带来的问题</h4><p>follower 可能有当前 leader 有的条目，也可能缺少当前 leader 部分条目，也可能兼有。如下一种情况：</p>
-<p><figure class="image-bubble">
+<figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://cdn.nlark.com/yuque/0/2019/png/457347/1566972043233-beeb4e33-7d42-4ab9-8826-3cf265c68fb1.png#align=left&display=inline&height=290&name=Screenshot%20from%202019-08-28%2014-00-22.png&originHeight=558&originWidth=821&size=74359&status=done&width=426" alt="leader 崩溃带来的问题" title="">
+                    <img src="/2019/09/07/Raft浅谈/complex.png" alt="leader 崩溃带来的问题" title="">
                 </div>
                 <div class="image-caption">leader 崩溃带来的问题</div>
-            </figure><br><br><br>可能产生这样的原因是：f 当选为 leader，写入日志后没有成功复制就崩溃了；很快 f 机器又重启了，又再次被选为 leader，写入日志后又再次崩溃了，之后是 e，等等。最终会造成上图的结果。leader 是第一行的机器，任期为8。<br><br><br><strong>解决办法</strong><br>强制 follower 直接复制 leader 的日志。</p>
+            </figure>
+<p>可能产生这样的原因是：f 当选为 leader，写入日志后没有成功复制就崩溃了；很快 f 机器又重启了，又再次被选为 leader，写入日志后又再次崩溃了，之后是 e，等等。最终会造成上图的结果。leader 是第一行的机器，任期为8。<br><br><br><strong>解决办法</strong><br>强制 follower 直接复制 leader 的日志。</p>
 <ul>
 <li>leader 从日志最后一条开始往前找，一个对应其他follower的 nextIndex[] 数组维护，初始为leader尾index+1；</li>
 <li>每次尝试写入 follower ，不一致则 nextIndex-1，直到找到一致的地方；</li>
@@ -368,13 +369,14 @@
 <ul>
 <li>实际上确实是这样的</li>
 </ul>
-<h4 id="2-提交之前任期内的日志"><a href="#2-提交之前任期内的日志" class="headerlink" title="2. 提交之前任期内的日志"></a>2. 提交之前任期内的日志</h4><p><figure class="image-bubble">
+<h4 id="2-提交之前任期内的日志"><a href="#2-提交之前任期内的日志" class="headerlink" title="2. 提交之前任期内的日志"></a>2. 提交之前任期内的日志</h4><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://cdn.nlark.com/yuque/0/2019/png/457347/1566992314754-b2579d0f-201c-4ab1-9fd6-229c1db92786.png#align=left&display=inline&height=218&name=Screenshot%20from%202019-08-28%2019-38-16.png&originHeight=440&originWidth=953&size=72011&status=done&width=472" alt="是否提交之前任期内的日志" title="">
+                    <img src="/2019/09/07/Raft浅谈/commit_in_current_term.png" alt="是否提交之前任期内的日志" title="">
                 </div>
                 <div class="image-caption">是否提交之前任期内的日志</div>
-            </figure><br><br><br>考虑如上问题。S1作为 leader，任期为2，复制到S2后崩溃；再次选举，S5获选为leader，任期为3，写入自身日志后崩溃；再次选举，S1的末尾日志是最新的，可以获选为leader，任期为4，此时将自己的日志复制到了S3，保证了大多数节点都复制了日志。<br><br><br><strong>这里问题来了：此时S1符合commit的条件，那么到底是提交呢还是不提交？</strong></p>
+            </figure>
+<p>考虑如上问题。S1作为 leader，任期为2，复制到S2后崩溃；再次选举，S5获选为leader，任期为3，写入自身日志后崩溃；再次选举，S1的末尾日志是最新的，可以获选为leader，任期为4，此时将自己的日志复制到了S3，保证了大多数节点都复制了日志。<br><br><br><strong>这里问题来了：此时S1符合commit的条件，那么到底是提交呢还是不提交？</strong></p>
 <ul>
 <li>如果提交，情况为d。提交后，S1崩溃，此时集群中的节点最新的节点为S5（因为尾日志任期最新），并且会进行日志复制，这样的话，就会将之前的任期为2的日志覆盖！这样的话，集群中的节点部分就会缺失term 2的操作！</li>
 </ul>
@@ -410,7 +412,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2019-09-07T06:21:01.738Z" itemprop="dateUpdated">2019-09-07 06:21:01</time>
+    最后更新时间：<time datetime="2019-09-07T09:40:13.899Z" itemprop="dateUpdated">2019-09-07 09:40:13</time>
 </span><br>
 
 
