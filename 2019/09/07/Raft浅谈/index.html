@@ -38,7 +38,7 @@
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2019/png/457347/1566962392234-6838d5b2-0871-4bdb-ba64-6754fa4eb355.png#align=left&display=inline&height=301&name=Screenshot%20from%202019-08-28%2011-19-29.png&originHeight=505&originWidth=666&size=68848&status=done&width=397">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2019/png/457347/1566972043233-beeb4e33-7d42-4ab9-8826-3cf265c68fb1.png#align=left&display=inline&height=290&name=Screenshot%20from%202019-08-28%2014-00-22.png&originHeight=558&originWidth=821&size=74359&status=done&width=426">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2019/png/457347/1566992314754-b2579d0f-201c-4ab1-9fd6-229c1db92786.png#align=left&display=inline&height=218&name=Screenshot%20from%202019-08-28%2019-38-16.png&originHeight=440&originWidth=953&size=72011&status=done&width=472">
-<meta property="og:updated_time" content="2019-09-07T06:07:02.216Z">
+<meta property="og:updated_time" content="2019-09-07T06:10:13.434Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Raft浅谈">
 <meta name="twitter:description" content="Raft 浅谈分布式一致性(Distributed Consensus)What 分布式环境：复杂，Some of the processes (agents) may fail or be unreliable in other ways 一致性：requires agreement among a number of processes (or agents) for a single dat">
@@ -287,8 +287,20 @@
 <ul>
 <li>心跳机制：候选人拉票，半数以上赞同即成为下一任 leader</li>
 </ul>
-<p><img src="https://cdn.nlark.com/yuque/0/2019/png/457347/1566960733697-9f454765-cc85-4a22-89ec-077da45c00d1.png#align=left&amp;display=inline&amp;height=300&amp;name=Screenshot%20from%202019-08-28%2010-51-50.png&amp;originHeight=388&amp;originWidth=408&amp;size=18629&amp;status=done&amp;width=315" alt="等待 leader">      <img src="https://cdn.nlark.com/yuque/0/2019/png/457347/1566960788345-5e2216f2-2cb2-48e9-b0d8-b9c86d622a7c.png#align=left&amp;display=inline&amp;height=294&amp;name=Screenshot%20from%202019-08-28%2010-52-47.png&amp;originHeight=380&amp;originWidth=408&amp;size=20270&amp;status=done&amp;width=316" alt="S1 成为 candidate"></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2019/png/457347/1566960866335-7a29ab44-24f1-4788-a33a-4bc8db303615.png#align=left&amp;display=inline&amp;height=296&amp;name=Screenshot%20from%202019-08-28%2010-54-10.png&amp;originHeight=382&amp;originWidth=408&amp;size=28063&amp;status=done&amp;width=316" alt="投票且 S2 成为 candidate">      <img src="https://cdn.nlark.com/yuque/0/2019/png/457347/1566960928944-efcfd092-bd34-4119-a671-9d96b29c8b59.png#align=left&amp;display=inline&amp;height=292&amp;name=Screenshot%20from%202019-08-28%2010-54-58.png&amp;originHeight=387&amp;originWidth=407&amp;size=27120&amp;status=done&amp;width=307" alt="S1 当选为 leader"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://cdn.nlark.com/yuque/0/2019/png/457347/1566960733697-9f454765-cc85-4a22-89ec-077da45c00d1.png#align=left&display=inline&height=300&name=Screenshot%20from%202019-08-28%2010-51-50.png&originHeight=388&originWidth=408&size=18629&status=done&width=315" alt="等待 leader" title="">
+                </div>
+                <div class="image-caption">等待 leader</div>
+            </figure>      
+<p><img src="https://cdn.nlark.com/yuque/0/2019/png/457347/1566960788345-5e2216f2-2cb2-48e9-b0d8-b9c86d622a7c.png#align=left&amp;display=inline&amp;height=294&amp;name=Screenshot%20from%202019-08-28%2010-52-47.png&amp;originHeight=380&amp;originWidth=408&amp;size=20270&amp;status=done&amp;width=316" alt="S1 成为 candidate"><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://cdn.nlark.com/yuque/0/2019/png/457347/1566960866335-7a29ab44-24f1-4788-a33a-4bc8db303615.png#align=left&display=inline&height=296&name=Screenshot%20from%202019-08-28%2010-54-10.png&originHeight=382&originWidth=408&size=28063&status=done&width=316" alt="投票且 S2 成为 candidate" title="">
+                </div>
+                <div class="image-caption">投票且 S2 成为 candidate</div>
+            </figure><br><img src="https://cdn.nlark.com/yuque/0/2019/png/457347/1566960928944-efcfd092-bd34-4119-a671-9d96b29c8b59.png#align=left&amp;display=inline&amp;height=292&amp;name=Screenshot%20from%202019-08-28%2010-54-58.png&amp;originHeight=387&amp;originWidth=407&amp;size=27120&amp;status=done&amp;width=307" alt="S1 当选为 leader"></p>
 <ul>
 <li><strong>选举 RPC</strong>，会带有部分信息，如任期号</li>
 <li>选举结果：自己是 leader；别的节点是 leader；超时没选出来</li>
@@ -387,7 +399,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2019-09-07T06:07:02.216Z" itemprop="dateUpdated">2019-09-07 06:07:02</time>
+    最后更新时间：<time datetime="2019-09-07T06:10:13.434Z" itemprop="dateUpdated">2019-09-07 06:10:13</time>
 </span><br>
 
 
