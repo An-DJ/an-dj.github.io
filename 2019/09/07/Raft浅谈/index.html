@@ -20,12 +20,12 @@
     
     
     <meta name="keywords" content="">
-    <meta name="description" content="Raft 浅谈 分布式一致性(Distributed Consensus) What 分布式环境：复杂，Some of the processes (agents) may fail or be unreliable in other ways 一致性：requires agreement among a number of processes (or agents) for a single d">
+    <meta name="description" content="Raft 浅谈分布式一致性(Distributed Consensus)What 分布式环境：复杂，Some of the processes (agents) may fail or be unreliable in other ways 一致性：requires agreement among a number of processes (or agents) for a single dat">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Raft浅谈">
 <meta property="og:url" content="http://andj.me/2019/09/07/Raft浅谈/index.html">
 <meta property="og:site_name" content="泡壶Java">
-<meta property="og:description" content="Raft 浅谈 分布式一致性(Distributed Consensus) What 分布式环境：复杂，Some of the processes (agents) may fail or be unreliable in other ways 一致性：requires agreement among a number of processes (or agents) for a single d">
+<meta property="og:description" content="Raft 浅谈分布式一致性(Distributed Consensus)What 分布式环境：复杂，Some of the processes (agents) may fail or be unreliable in other ways 一致性：requires agreement among a number of processes (or agents) for a single dat">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2019/png/457347/1566956207876-4391d331-854b-4838-ba0c-509fb38ad66c.png#align=left&display=inline&height=293&name=consensus.png&originHeight=293&originWidth=541&size=16535&status=done&width=541">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2019/png/457347/1566958856739-ad3d084f-adbb-4f9f-8b72-641feb93c79a.png#align=left&display=inline&height=247&name=Screenshot%20from%202019-08-28%2010-20-28.png&originHeight=247&originWidth=392&size=37206&status=done&width=392">
@@ -38,10 +38,10 @@
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2019/png/457347/1566962392234-6838d5b2-0871-4bdb-ba64-6754fa4eb355.png#align=left&display=inline&height=301&name=Screenshot%20from%202019-08-28%2011-19-29.png&originHeight=505&originWidth=666&size=68848&status=done&width=397">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2019/png/457347/1566972043233-beeb4e33-7d42-4ab9-8826-3cf265c68fb1.png#align=left&display=inline&height=290&name=Screenshot%20from%202019-08-28%2014-00-22.png&originHeight=558&originWidth=821&size=74359&status=done&width=426">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2019/png/457347/1566992314754-b2579d0f-201c-4ab1-9fd6-229c1db92786.png#align=left&display=inline&height=218&name=Screenshot%20from%202019-08-28%2019-38-16.png&originHeight=440&originWidth=953&size=72011&status=done&width=472">
-<meta property="og:updated_time" content="2019-09-07T05:42:45.256Z">
+<meta property="og:updated_time" content="2019-09-07T06:02:50.889Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Raft浅谈">
-<meta name="twitter:description" content="Raft 浅谈 分布式一致性(Distributed Consensus) What 分布式环境：复杂，Some of the processes (agents) may fail or be unreliable in other ways 一致性：requires agreement among a number of processes (or agents) for a single d">
+<meta name="twitter:description" content="Raft 浅谈分布式一致性(Distributed Consensus)What 分布式环境：复杂，Some of the processes (agents) may fail or be unreliable in other ways 一致性：requires agreement among a number of processes (or agents) for a single dat">
 <meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2019/png/457347/1566956207876-4391d331-854b-4838-ba0c-509fb38ad66c.png#align=left&display=inline&height=293&name=consensus.png&originHeight=293&originWidth=541&size=16535&status=done&width=541">
     
         <link rel="alternate" type="application/atom+xml" title="泡壶Java" href="/atom.xml">
@@ -182,7 +182,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Raft-浅谈"><span class="post-toc-number">1.</span> <span class="post-toc-text">Raft 浅谈</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#分布式一致性-Distributed-Consensus"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">分布式一致性(Distributed Consensus)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#What"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">What</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Description"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">Description</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Where"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">Where</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一致性协议-Consensus-Protocol"><span class="post-toc-number">1.1.4.</span> <span class="post-toc-text">一致性协议(Consensus Protocol)</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Paxos"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Paxos</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Raft"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">Raft</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#复制状态机-Replicated-state-machines"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">复制状态机 Replicated state machines</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Raft-基础"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">Raft 基础</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#领导选举-leader-election"><span class="post-toc-number">1.3.3.</span> <span class="post-toc-text">领导选举 leader election</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#日志复制-log-replication"><span class="post-toc-number">1.3.4.</span> <span class="post-toc-text">日志复制 log replication</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#leader-崩溃带来的问题"><span class="post-toc-number">1.3.4.1.</span> <span class="post-toc-text">leader 崩溃带来的问题</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安全性-safety"><span class="post-toc-number">1.3.5.</span> <span class="post-toc-text">安全性 safety</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-选举限制"><span class="post-toc-number">1.3.5.1.</span> <span class="post-toc-text">1. 选举限制</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-提交之前任期内的日志"><span class="post-toc-number">1.3.5.2.</span> <span class="post-toc-text">2. 提交之前任期内的日志</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#客户端交互"><span class="post-toc-number">1.3.6.</span> <span class="post-toc-text">客户端交互</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Have-a-try"><span class="post-toc-number">1.3.7.</span> <span class="post-toc-text">Have a try</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">参考)</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Raft-浅谈"><span class="post-toc-number">1.</span> <span class="post-toc-text">Raft 浅谈</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#分布式一致性-Distributed-Consensus"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">分布式一致性(Distributed Consensus)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#What"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">What</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Description"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">Description</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Where"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">Where</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一致性协议-Consensus-Protocol"><span class="post-toc-number">1.1.4.</span> <span class="post-toc-text">一致性协议(Consensus Protocol)</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Paxos"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Paxos</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Raft"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">Raft</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#复制状态机-Replicated-state-machines"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">复制状态机 Replicated state machines</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#领导选举-leader-election"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">领导选举 leader election</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#日志复制-log-replication"><span class="post-toc-number">1.3.3.</span> <span class="post-toc-text">日志复制 log replication</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#leader-崩溃带来的问题"><span class="post-toc-number">1.3.3.1.</span> <span class="post-toc-text">leader 崩溃带来的问题</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安全性-safety"><span class="post-toc-number">1.3.4.</span> <span class="post-toc-text">安全性 safety</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-选举限制"><span class="post-toc-number">1.3.4.1.</span> <span class="post-toc-text">1. 选举限制</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-提交之前任期内的日志"><span class="post-toc-number">1.3.4.2.</span> <span class="post-toc-text">2. 提交之前任期内的日志</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#客户端交互"><span class="post-toc-number">1.3.5.</span> <span class="post-toc-text">客户端交互</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Have-a-try"><span class="post-toc-number">1.3.6.</span> <span class="post-toc-text">Have a try</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">参考)</span></a></li></ol></li></ol>
         </nav>
     </aside>
 
@@ -205,9 +205,7 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h1 id="Raft-浅谈"><a href="#Raft-浅谈" class="headerlink" title="Raft 浅谈"></a>Raft 浅谈</h1><p><a name="634c00d0"></a></p>
-<h2 id="分布式一致性-Distributed-Consensus"><a href="#分布式一致性-Distributed-Consensus" class="headerlink" title="分布式一致性(Distributed Consensus)"></a>分布式一致性(Distributed Consensus)</h2><p><a name="What"></a></p>
-<h3 id="What"><a href="#What" class="headerlink" title="What"></a>What</h3><ul>
+            <h1 id="Raft-浅谈"><a href="#Raft-浅谈" class="headerlink" title="Raft 浅谈"></a>Raft 浅谈</h1><h2 id="分布式一致性-Distributed-Consensus"><a href="#分布式一致性-Distributed-Consensus" class="headerlink" title="分布式一致性(Distributed Consensus)"></a>分布式一致性(Distributed Consensus)</h2><h3 id="What"><a href="#What" class="headerlink" title="What"></a>What</h3><ul>
 <li>分布式环境：复杂，Some of the processes (agents) may fail or be unreliable in other ways</li>
 <li>一致性：requires agreement among a number of processes (or agents) for a single data value</li>
 <li>单个节点（数据副本）更新，所有节点数据也要相应更新。</li>
@@ -215,25 +213,22 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://cdn.nlark.com/yuque/0/2019/png/457347/1566956207876-4391d331-854b-4838-ba0c-509fb38ad66c.png#align=left&display=inline&height=293&name=consensus.png&originHeight=293&originWidth=541&size=16535&status=done&width=541" alt="consensus.png" title="">
+                    <img src="https://cdn.nlark.com/yuque/0/2019/png/457347/1566956207876-4391d331-854b-4838-ba0c-509fb38ad66c.png#align=left&display=inline&height=293&name=consensus.png&originHeight=293&originWidth=541&size=16535&status=done&width=541" alt="分布式一致性图示" title="">
                 </div>
-                <div class="image-caption">consensus.png</div>
+                <div class="image-caption">分布式一致性图示</div>
             </figure>
-<p><a name="Description"></a></p>
 <h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p><strong>Termination</strong></p>
 <p>Eventually, every correct process decides some value.</p>
 <p><strong>Integrity</strong> ( <em>be honest</em> )</p>
 <p>If all the correct processes proposed the same value _v_, then any correct process must decide _v_.</p>
 <p><strong>Agreement</strong></p>
 <p>Every correct process must agree on the same value.</p>
-<p><a name="Where"></a></p>
 <h3 id="Where"><a href="#Where" class="headerlink" title="Where"></a>Where</h3><ul>
 <li>Leader election / Mutual Exclusion</li>
 <li>Commit or Abort in distributed transactions</li>
 <li>Reaching agreement about which process has failed</li>
 <li>Clock phase synchronization</li>
 </ul>
-<p><a name="6f70b6a9"></a></p>
 <h3 id="一致性协议-Consensus-Protocol"><a href="#一致性协议-Consensus-Protocol" class="headerlink" title="一致性协议(Consensus Protocol)"></a>一致性协议(Consensus Protocol)</h3><ul>
 <li>2PC (Two-Phase Commit)</li>
 <li>3PC (Three-Phase Commit)</li>
@@ -241,48 +236,34 @@
 <li>Chubby</li>
 <li>ZAB (ZooKeeper Atomic Broadcast)</li>
 <li>Raft</li>
-<li><p>…<br><a name="TxVGG"></a></p>
-<h2 id="Paxos"><a href="#Paxos" class="headerlink" title="Paxos"></a>Paxos</h2></li>
-<li><p>Lamport 提出的一种基于消息传递的分布式一致性算法</p>
-</li>
-<li><em>The Part-Time Parliament, 1998，</em>首篇论文，以故事性叙述（同行表示看不懂）</li>
-<li><em>Paxos Made Simple, 2001，</em>再篇，算法描述（表示仍然看不懂）</li>
+<li>…</li>
+</ul>
+<h2 id="Paxos"><a href="#Paxos" class="headerlink" title="Paxos"></a>Paxos</h2><ul>
+<li>Lamport 提出的一种基于消息传递的分布式一致性算法</li>
+<li><em>The Part-Time Parliament, 1998</em>，首篇论文，以故事性叙述（同行表示看不懂）</li>
+<li><em>Paxos Made Simple, 2001</em>，再篇，算法描述（表示仍然看不懂）</li>
 <li>too difficult to understand and implement</li>
 <li>产生了许多结合实际的衍生实现</li>
 </ul>
-<p><a name="Raft"></a></p>
 <h2 id="Raft"><a href="#Raft" class="headerlink" title="Raft"></a>Raft</h2><ul>
 <li>论文: <em>In Search of an Understandable Consensus Algorithm (Extended Version)</em></li>
-<li>基于日志复制 ( _replicated log _)</li>
+<li>基于日志复制 ( replicated log )</li>
 <li>简单，易懂，易于实现，这是 Raft 的研究目的</li>
 <li>Stanford 调查发现，对于学生，Raft 算法比 Paxos 更加易于学习</li>
-<li>_3 part: _<strong><em>leader election, log replication, and safety</em></strong></li>
+<li>3 part: <strong><em>leader election, log replication, and safety</em></strong></li>
 </ul>
-<p><a name="r8RYl"></a></p>
-<h3 id="复制状态机-Replicated-state-machines"><a href="#复制状态机-Replicated-state-machines" class="headerlink" title="复制状态机 Replicated state machines"></a>复制状态机 <em>Replicated state machines</em></h3><p>_<br><figure class="image-bubble">
+<h3 id="复制状态机-Replicated-state-machines"><a href="#复制状态机-Replicated-state-machines" class="headerlink" title="复制状态机 Replicated state machines"></a>复制状态机 Replicated state machines</h3><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://cdn.nlark.com/yuque/0/2019/png/457347/1566958856739-ad3d084f-adbb-4f9f-8b72-641feb93c79a.png#align=left&display=inline&height=247&name=Screenshot%20from%202019-08-28%2010-20-28.png&originHeight=247&originWidth=392&size=37206&status=done&width=392" alt="Screenshot from 2019-08-28 10-20-28.png" title="">
+                    <img src="https://cdn.nlark.com/yuque/0/2019/png/457347/1566958856739-ad3d084f-adbb-4f9f-8b72-641feb93c79a.png#align=left&display=inline&height=247&name=Screenshot%20from%202019-08-28%2010-20-28.png&originHeight=247&originWidth=392&size=37206&status=done&width=392" alt="复制状态机" title="">
                 </div>
-                <div class="image-caption">Screenshot from 2019-08-28 10-20-28.png</div>
-            </figure><br></p>
-<ul>
-<li>一致性算法管理来自客户端指令的复制日志</li>
-<li>状态机从日志中处理相同顺序的相同指令，所以产生的结果一致</li>
-<li>保证复制日志相同 –&gt; 保证一致性</li>
-</ul>
-<p><a name="EPiTq"></a></p>
-<h3 id="Raft-基础"><a href="#Raft-基础" class="headerlink" title="Raft 基础"></a>Raft 基础</h3><ul>
-<li>Raft 集群中包含若干节点，通常是5个</li>
-<li>半数以上的节点存活，保持可用性</li>
-<li>节点角色状态机（3种角色）</li>
-</ul>
-<figure class="image-bubble">
+                <div class="image-caption">复制状态机</div>
+            </figure><br><br><br>- 一致性算法管理来自客户端指令的复制日志<br>- 状态机从日志中处理相同顺序的相同指令，所以产生的结果一致<br>- 保证复制日志相同 –&gt; 保证一致性<br><br>### Raft 基础<br><br>- Raft 集群中包含若干节点，通常是5个<br>- 半数以上的节点存活，保持可用性<br>- 节点角色状态机（3种角色）<br><br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://cdn.nlark.com/yuque/0/2019/png/457347/1566959735657-020ad9e5-bd81-4799-9e6b-2b821b2c0425.png#align=left&display=inline&height=192&name=Screenshot%20from%202019-08-28%2010-35-09.png&originHeight=192&originWidth=441&size=40113&status=done&width=441" alt="Screenshot from 2019-08-28 10-35-09.png" title="">
+                    <img src="https://cdn.nlark.com/yuque/0/2019/png/457347/1566959735657-020ad9e5-bd81-4799-9e6b-2b821b2c0425.png#align=left&display=inline&height=192&name=Screenshot%20from%202019-08-28%2010-35-09.png&originHeight=192&originWidth=441&size=40113&status=done&width=441" alt="role 状态机" title="">
                 </div>
-                <div class="image-caption">Screenshot from 2019-08-28 10-35-09.png</div>
+                <div class="image-caption">role 状态机</div>
             </figure>
 <ul>
 <li>通常情况下，系统中只有一个 leader ，其他都是 follower</li>
@@ -292,24 +273,24 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://cdn.nlark.com/yuque/0/2019/png/457347/1566960157811-627cdd28-df0f-48ab-85f3-665535e71ba7.png#align=left&display=inline&height=169&name=Screenshot%20from%202019-08-28%2010-42-17.png&originHeight=331&originWidth=852&size=35827&status=done&width=435" alt="Screenshot from 2019-08-28 10-42-17.png" title="">
+                    <img src="https://cdn.nlark.com/yuque/0/2019/png/457347/1566960157811-627cdd28-df0f-48ab-85f3-665535e71ba7.png#align=left&display=inline&height=169&name=Screenshot%20from%202019-08-28%2010-42-17.png&originHeight=331&originWidth=852&size=35827&status=done&width=435" alt="任期示例" title="">
                 </div>
-                <div class="image-caption">Screenshot from 2019-08-28 10-42-17.png</div>
+                <div class="image-caption">任期示例</div>
             </figure>
 <ul>
 <li>每一段任期都是从一次选举开始，任期内 leader 唯一且发挥作用</li>
 <li>任期是一种逻辑时钟，任期号单调增</li>
 <li>某个 leader 发现有节点任期号比自己大？ 切换为 follower</li>
-<li><p>某个请求不属于该任期处理？拒绝<br><a name="h9iWL"></a></p>
-<h3 id="领导选举-leader-election"><a href="#领导选举-leader-election" class="headerlink" title="领导选举 leader election"></a>领导选举 <strong><em>leader election</em></strong></h3><p>集群初始化 or 当现存的领导人宕机的时候，一个新的领导人需要被选举出来。</p>
-</li>
-<li><p>心跳机制：候选人拉票，半数以上赞同即成为下一任 leader</p>
-</li>
+<li>某个请求不属于该任期处理？拒绝</li>
 </ul>
-<p><img src="https://cdn.nlark.com/yuque/0/2019/png/457347/1566960733697-9f454765-cc85-4a22-89ec-077da45c00d1.png#align=left&amp;display=inline&amp;height=300&amp;name=Screenshot%20from%202019-08-28%2010-51-50.png&amp;originHeight=388&amp;originWidth=408&amp;size=18629&amp;status=done&amp;width=315" alt="Screenshot from 2019-08-28 10-51-50.png">      <img src="https://cdn.nlark.com/yuque/0/2019/png/457347/1566960788345-5e2216f2-2cb2-48e9-b0d8-b9c86d622a7c.png#align=left&amp;display=inline&amp;height=294&amp;name=Screenshot%20from%202019-08-28%2010-52-47.png&amp;originHeight=380&amp;originWidth=408&amp;size=20270&amp;status=done&amp;width=316" alt="Screenshot from 2019-08-28 10-52-47.png"></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2019/png/457347/1566960866335-7a29ab44-24f1-4788-a33a-4bc8db303615.png#align=left&amp;display=inline&amp;height=296&amp;name=Screenshot%20from%202019-08-28%2010-54-10.png&amp;originHeight=382&amp;originWidth=408&amp;size=28063&amp;status=done&amp;width=316" alt="Screenshot from 2019-08-28 10-54-10.png">      <img src="https://cdn.nlark.com/yuque/0/2019/png/457347/1566960928944-efcfd092-bd34-4119-a671-9d96b29c8b59.png#align=left&amp;display=inline&amp;height=292&amp;name=Screenshot%20from%202019-08-28%2010-54-58.png&amp;originHeight=387&amp;originWidth=407&amp;size=27120&amp;status=done&amp;width=307" alt="Screenshot from 2019-08-28 10-54-58.png"></p>
+<h3 id="领导选举-leader-election"><a href="#领导选举-leader-election" class="headerlink" title="领导选举 leader election"></a>领导选举 <strong>leader election</strong></h3><p>集群初始化 or 当现存的领导人宕机的时候，一个新的领导人需要被选举出来。</p>
 <ul>
-<li><em><strong>选举 RPC</strong></em>，会带有部分信息，如任期号</li>
+<li>心跳机制：候选人拉票，半数以上赞同即成为下一任 leader</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2019/png/457347/1566960733697-9f454765-cc85-4a22-89ec-077da45c00d1.png#align=left&amp;display=inline&amp;height=300&amp;name=Screenshot%20from%202019-08-28%2010-51-50.png&amp;originHeight=388&amp;originWidth=408&amp;size=18629&amp;status=done&amp;width=315" alt="等待 leader">      <img src="https://cdn.nlark.com/yuque/0/2019/png/457347/1566960788345-5e2216f2-2cb2-48e9-b0d8-b9c86d622a7c.png#align=left&amp;display=inline&amp;height=294&amp;name=Screenshot%20from%202019-08-28%2010-52-47.png&amp;originHeight=380&amp;originWidth=408&amp;size=20270&amp;status=done&amp;width=316" alt="S1 成为 candidate"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2019/png/457347/1566960866335-7a29ab44-24f1-4788-a33a-4bc8db303615.png#align=left&amp;display=inline&amp;height=296&amp;name=Screenshot%20from%202019-08-28%2010-54-10.png&amp;originHeight=382&amp;originWidth=408&amp;size=28063&amp;status=done&amp;width=316" alt="投票且 S2 成为 candidate">      <img src="https://cdn.nlark.com/yuque/0/2019/png/457347/1566960928944-efcfd092-bd34-4119-a671-9d96b29c8b59.png#align=left&amp;display=inline&amp;height=292&amp;name=Screenshot%20from%202019-08-28%2010-54-58.png&amp;originHeight=387&amp;originWidth=407&amp;size=27120&amp;status=done&amp;width=307" alt="S1 当选为 leader"></p>
+<ul>
+<li><strong>选举 RPC</strong>，会带有部分信息，如任期号</li>
 <li>选举结果：自己是 leader；别的节点是 leader；超时没选出来</li>
 <li>选举先来先服务</li>
 <li>RPC心跳包 任期号比自己的小？不选它</li>
@@ -317,17 +298,16 @@
 <li>一直超时一直选怎么办？随机指定超时时间</li>
 <li><strong>总是能选出有且只有一个 leader</strong></li>
 </ul>
-<p><a name="PFkwD"></a></p>
-<h3 id="日志复制-log-replication"><a href="#日志复制-log-replication" class="headerlink" title="日志复制 log replication"></a>日志复制 <strong><em>log replication</em></strong></h3><p>一旦一个 leader 被选出来，它便可以对客户端进行服务。leader 必须从客户端接收日志然后复制到集群中的其他节点，且强制要求其他节点的日志保持和自己相同。</p>
+<h3 id="日志复制-log-replication"><a href="#日志复制-log-replication" class="headerlink" title="日志复制 log replication"></a>日志复制 <strong>log replication</strong></h3><p>一旦一个 leader 被选出来，它便可以对客户端进行服务。leader 必须从客户端接收日志然后复制到集群中的其他节点，且强制要求其他节点的日志保持和自己相同。</p>
 <ul>
 <li>流程：客户端发起指令日志 <br>–&gt; leader 存储日志并发送复制RPC给其他节点（通信存在问题，会不断进行尝试） <br>–&gt; 被安全复制后，leader 将其执行到自身的状态机，返回结果给客户端 <br>–&gt; 其他节点执行</li>
 </ul>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://cdn.nlark.com/yuque/0/2019/png/457347/1566962392234-6838d5b2-0871-4bdb-ba64-6754fa4eb355.png#align=left&display=inline&height=301&name=Screenshot%20from%202019-08-28%2011-19-29.png&originHeight=505&originWidth=666&size=68848&status=done&width=397" alt="Screenshot from 2019-08-28 11-19-29.png" title="">
+                    <img src="https://cdn.nlark.com/yuque/0/2019/png/457347/1566962392234-6838d5b2-0871-4bdb-ba64-6754fa4eb355.png#align=left&display=inline&height=301&name=Screenshot%20from%202019-08-28%2011-19-29.png&originHeight=505&originWidth=666&size=68848&status=done&width=397" alt="日志复制" title="">
                 </div>
-                <div class="image-caption">Screenshot from 2019-08-28 11-19-29.png</div>
+                <div class="image-caption">日志复制</div>
             </figure>
 <ul>
 <li>日志有序号，有创建时的任期号，有操作指令</li>
@@ -338,14 +318,15 @@
 <p><strong>日志匹配特性</strong></p>
 <ul>
 <li>如果在不同的日志中的两个条目拥有相同的索引和任期号，那么他们存储了相同的指令</li>
-<li>如果在不同的日志中的两个条目拥有相同的索引和任期号，那么他们之前的所有日志条目也全部相同<br><a name="O9NOS"></a><h4 id="leader-崩溃带来的问题"><a href="#leader-崩溃带来的问题" class="headerlink" title="leader 崩溃带来的问题"></a>leader 崩溃带来的问题</h4>follower 可能有当前 leader 有的条目，也可能缺少当前 leader 部分条目，也可能兼有。如下一种情况：</li>
+<li>如果在不同的日志中的两个条目拥有相同的索引和任期号，那么他们之前的所有日志条目也全部相同</li>
 </ul>
+<h4 id="leader-崩溃带来的问题"><a href="#leader-崩溃带来的问题" class="headerlink" title="leader 崩溃带来的问题"></a>leader 崩溃带来的问题</h4><p>follower 可能有当前 leader 有的条目，也可能缺少当前 leader 部分条目，也可能兼有。如下一种情况：</p>
 <p><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://cdn.nlark.com/yuque/0/2019/png/457347/1566972043233-beeb4e33-7d42-4ab9-8826-3cf265c68fb1.png#align=left&display=inline&height=290&name=Screenshot%20from%202019-08-28%2014-00-22.png&originHeight=558&originWidth=821&size=74359&status=done&width=426" alt="Screenshot from 2019-08-28 14-00-22.png" title="">
+                    <img src="https://cdn.nlark.com/yuque/0/2019/png/457347/1566972043233-beeb4e33-7d42-4ab9-8826-3cf265c68fb1.png#align=left&display=inline&height=290&name=Screenshot%20from%202019-08-28%2014-00-22.png&originHeight=558&originWidth=821&size=74359&status=done&width=426" alt="leader 崩溃带来的问题" title="">
                 </div>
-                <div class="image-caption">Screenshot from 2019-08-28 14-00-22.png</div>
+                <div class="image-caption">leader 崩溃带来的问题</div>
             </figure><br><br><br>可能产生这样的原因是：f 当选为 leader，写入日志后没有成功复制就崩溃了；很快 f 机器又重启了，又再次被选为 leader，写入日志后又再次崩溃了，之后是 e，等等。最终会造成上图的结果。leader 是第一行的机器，任期为8。<br><br><br><strong>解决办法</strong><br>强制 follower 直接复制 leader 的日志。</p>
 <ul>
 <li>leader 从日志最后一条开始往前找，一个对应其他follower的 nextIndex[] 数组维护，初始为leader尾index+1；</li>
@@ -353,9 +334,8 @@
 <li>强制复制 leader nextIndex 到末尾的部分给 follower</li>
 <li><strong>保证了日志匹配特性！</strong></li>
 </ul>
-<p><a name="SPgqb"></a></p>
 <h3 id="安全性-safety"><a href="#安全性-safety" class="headerlink" title="安全性 safety"></a>安全性 <strong><em>safety</em></strong></h3><p>前述算法实际上并不能够充分保证每一个状态机会按照相同的顺序执行相同的指令，会存在一些问题，比如 leader 提交日志， 但某个 follower 变为不可用，之后该 follower 被选举为 leader，并且覆盖了这些日志条目。因此，可能存在不同的状态机执行不同的指令序列。</p>
-<p>如下有<strong>两处</strong>规则限制：<br><a name="f8Ndw"></a></p>
+<p>如下有<strong>两处</strong>规则限制：</p>
 <h4 id="1-选举限制"><a href="#1-选举限制" class="headerlink" title="1. 选举限制"></a>1. 选举限制</h4><ul>
 <li>leader 必须包含所有的已 commit 的日志</li>
 <li>选 leader 时，必须遵循如上规则，方法是，投票人会投给与大多数节点一样“新”的节点；拒绝非新节点</li>
@@ -365,13 +345,12 @@
 <ul>
 <li>实际上确实是这样的</li>
 </ul>
-<p><a name="oa0QZ"></a></p>
 <h4 id="2-提交之前任期内的日志"><a href="#2-提交之前任期内的日志" class="headerlink" title="2. 提交之前任期内的日志"></a>2. 提交之前任期内的日志</h4><p><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://cdn.nlark.com/yuque/0/2019/png/457347/1566992314754-b2579d0f-201c-4ab1-9fd6-229c1db92786.png#align=left&display=inline&height=218&name=Screenshot%20from%202019-08-28%2019-38-16.png&originHeight=440&originWidth=953&size=72011&status=done&width=472" alt="Screenshot from 2019-08-28 19-38-16.png" title="">
+                    <img src="https://cdn.nlark.com/yuque/0/2019/png/457347/1566992314754-b2579d0f-201c-4ab1-9fd6-229c1db92786.png#align=left&display=inline&height=218&name=Screenshot%20from%202019-08-28%2019-38-16.png&originHeight=440&originWidth=953&size=72011&status=done&width=472" alt="是否提交之前任期内的日志" title="">
                 </div>
-                <div class="image-caption">Screenshot from 2019-08-28 19-38-16.png</div>
+                <div class="image-caption">是否提交之前任期内的日志</div>
             </figure><br><br><br>考虑如上问题。S1作为 leader，任期为2，复制到S2后崩溃；再次选举，S5获选为leader，任期为3，写入自身日志后崩溃；再次选举，S1的末尾日志是最新的，可以获选为leader，任期为4，此时将自己的日志复制到了S3，保证了大多数节点都复制了日志。<br><br><br><strong>这里问题来了：此时S1符合commit的条件，那么到底是提交呢还是不提交？</strong></p>
 <ul>
 <li>如果提交，情况为d。提交后，S1崩溃，此时集群中的节点最新的节点为S5（因为尾日志任期最新），并且会进行日志复制，这样的话，就会将之前的任期为2的日志覆盖！这样的话，集群中的节点部分就会缺失term 2的操作！</li>
@@ -380,7 +359,6 @@
 <ul>
 <li>如果不提交，情况为e。S1崩溃的话，不会发生上述问题。S1不崩溃的话，在任期4生成日志并复制到大多数节点，然后再提交，这样的话，如果此时S1崩溃，S5并不能当选（想想为什么），因此解决了问题。</li>
 </ul>
-<p><a name="aarwI"></a></p>
 <h3 id="客户端交互"><a href="#客户端交互" class="headerlink" title="客户端交互"></a>客户端交互</h3><ul>
 <li>支持线性化语义</li>
 <li>客户端请求 -&gt; 任一服务器，非 leader 则会转发</li>
@@ -398,9 +376,7 @@
 </ul>
 </li>
 </ul>
-<p><a name="23W6E"></a></p>
 <h3 id="Have-a-try"><a href="#Have-a-try" class="headerlink" title="Have a try"></a>Have a try</h3><p>动手实现Raft：<br><a href="https://pdos.csail.mit.edu/6.824/labs/lab-raft.html" target="_blank" rel="noopener">https://pdos.csail.mit.edu/6.824/labs/lab-raft.html</a><br></p>
-<p><a name="d17a0f0b"></a></p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考)"></a>参考<a href="https://en.wikipedia.org/wiki/Consensus_(computer_science" target="_blank" rel="noopener"></a>)</h2><p><a href="https://raft.github.io/" target="_blank" rel="noopener">https://raft.github.io/</a><br><a href="https://raft.github.io/raft.pdf" target="_blank" rel="noopener">https://raft.github.io/raft.pdf</a><br><a href="https://github.com/maemual/raft-zh_cn/blob/master/raft-zh_cn.md" target="_blank" rel="noopener">https://github.com/maemual/raft-zh_cn/blob/master/raft-zh_cn.md</a><br><a href="https://pingcap.github.io/blog-cn/linearizability-and-raft/" target="_blank" rel="noopener">https://pingcap.github.io/blog-cn/linearizability-and-raft/</a><br><a href="http://homepage.divms.uiowa.edu/~ghosh/16612.week11.pdf" target="_blank" rel="noopener">http://homepage.divms.uiowa.edu/~ghosh/16612.week11.pdf</a><br><a href="https://en.wikipedia.org/wiki/Consensus_(computer_science" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Consensus_(computer_science)</a>)</p>
 <p>董峻铎，于2019年8月29日，小米武汉</p>
 
@@ -411,7 +387,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2019-09-07T05:42:45.256Z" itemprop="dateUpdated">2019-09-07 05:42:45</time>
+    最后更新时间：<time datetime="2019-09-07T06:02:50.889Z" itemprop="dateUpdated">2019-09-07 06:02:50</time>
 </span><br>
 
 
