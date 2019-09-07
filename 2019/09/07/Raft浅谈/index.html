@@ -38,7 +38,7 @@
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2019/png/457347/1566962392234-6838d5b2-0871-4bdb-ba64-6754fa4eb355.png#align=left&display=inline&height=301&name=Screenshot%20from%202019-08-28%2011-19-29.png&originHeight=505&originWidth=666&size=68848&status=done&width=397">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2019/png/457347/1566972043233-beeb4e33-7d42-4ab9-8826-3cf265c68fb1.png#align=left&display=inline&height=290&name=Screenshot%20from%202019-08-28%2014-00-22.png&originHeight=558&originWidth=821&size=74359&status=done&width=426">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2019/png/457347/1566992314754-b2579d0f-201c-4ab1-9fd6-229c1db92786.png#align=left&display=inline&height=218&name=Screenshot%20from%202019-08-28%2019-38-16.png&originHeight=440&originWidth=953&size=72011&status=done&width=472">
-<meta property="og:updated_time" content="2019-09-07T06:02:50.889Z">
+<meta property="og:updated_time" content="2019-09-07T06:05:17.312Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Raft浅谈">
 <meta name="twitter:description" content="Raft 浅谈分布式一致性(Distributed Consensus)What 分布式环境：复杂，Some of the processes (agents) may fail or be unreliable in other ways 一致性：requires agreement among a number of processes (or agents) for a single dat">
@@ -220,7 +220,7 @@
 <h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p><strong>Termination</strong></p>
 <p>Eventually, every correct process decides some value.</p>
 <p><strong>Integrity</strong> ( <em>be honest</em> )</p>
-<p>If all the correct processes proposed the same value _v_, then any correct process must decide _v_.</p>
+<p>If all the correct processes proposed the same value <strong>v</strong>, then any correct process must decide <strong>v</strong>.</p>
 <p><strong>Agreement</strong></p>
 <p>Every correct process must agree on the same value.</p>
 <h3 id="Where"><a href="#Where" class="headerlink" title="Where"></a>Where</h3><ul>
@@ -250,7 +250,7 @@
 <li>基于日志复制 ( replicated log )</li>
 <li>简单，易懂，易于实现，这是 Raft 的研究目的</li>
 <li>Stanford 调查发现，对于学生，Raft 算法比 Paxos 更加易于学习</li>
-<li>3 part: <strong><em>leader election, log replication, and safety</em></strong></li>
+<li>3 part: <strong>leader election, log replication, and safety</strong></li>
 </ul>
 <h3 id="复制状态机-Replicated-state-machines"><a href="#复制状态机-Replicated-state-machines" class="headerlink" title="复制状态机 Replicated state machines"></a>复制状态机 Replicated state machines</h3><figure class="image-bubble">
                 <div class="img-lightbox">
@@ -334,7 +334,7 @@
 <li>强制复制 leader nextIndex 到末尾的部分给 follower</li>
 <li><strong>保证了日志匹配特性！</strong></li>
 </ul>
-<h3 id="安全性-safety"><a href="#安全性-safety" class="headerlink" title="安全性 safety"></a>安全性 <strong><em>safety</em></strong></h3><p>前述算法实际上并不能够充分保证每一个状态机会按照相同的顺序执行相同的指令，会存在一些问题，比如 leader 提交日志， 但某个 follower 变为不可用，之后该 follower 被选举为 leader，并且覆盖了这些日志条目。因此，可能存在不同的状态机执行不同的指令序列。</p>
+<h3 id="安全性-safety"><a href="#安全性-safety" class="headerlink" title="安全性 safety"></a>安全性 <strong>safety</strong></h3><p>前述算法实际上并不能够充分保证每一个状态机会按照相同的顺序执行相同的指令，会存在一些问题，比如 leader 提交日志， 但某个 follower 变为不可用，之后该 follower 被选举为 leader，并且覆盖了这些日志条目。因此，可能存在不同的状态机执行不同的指令序列。</p>
 <p>如下有<strong>两处</strong>规则限制：</p>
 <h4 id="1-选举限制"><a href="#1-选举限制" class="headerlink" title="1. 选举限制"></a>1. 选举限制</h4><ul>
 <li>leader 必须包含所有的已 commit 的日志</li>
@@ -387,7 +387,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2019-09-07T06:02:50.889Z" itemprop="dateUpdated">2019-09-07 06:02:50</time>
+    最后更新时间：<time datetime="2019-09-07T06:05:17.312Z" itemprop="dateUpdated">2019-09-07 06:05:17</time>
 </span><br>
 
 
