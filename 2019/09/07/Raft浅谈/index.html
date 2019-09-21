@@ -38,7 +38,7 @@
 <meta property="og:image" content="http://andj.me/2019/09/07/Raft浅谈/leader_copy.png">
 <meta property="og:image" content="http://andj.me/2019/09/07/Raft浅谈/complex.png">
 <meta property="og:image" content="http://andj.me/2019/09/07/Raft浅谈/commit_in_current_term.png">
-<meta property="og:updated_time" content="2019-09-21T03:21:32.436Z">
+<meta property="og:updated_time" content="2019-09-21T03:36:11.501Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Raft浅谈">
 <meta name="twitter:description" content="分布式一致性(Distributed Consensus)What 分布式环境：复杂，Some of the processes (agents) may fail or be unreliable in other ways 一致性：requires agreement among a number of processes (or agents) for a single data value">
@@ -281,13 +281,8 @@
 <li>如果客户端与其中一个 follower，其会请求重定向</li>
 <li>领导人任期</li>
 </ul>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/2019/09/07/Raft浅谈/terms.png" alt="任期示例" title="">
-                </div>
-                <div class="image-caption">任期示例</div>
-            </figure>
+<div style="text-align: center;"><br>    <img src="/2019/09/07/Raft浅谈/terms.png" width="450"><br></div>
+
 <ul>
 <li>每一段任期都是从一次选举开始，任期内 leader 唯一且发挥作用</li>
 <li>任期是一种逻辑时钟，任期号单调增</li>
@@ -298,20 +293,8 @@
 <ul>
 <li>心跳机制：候选人拉票，半数以上赞同即成为下一任 leader</li>
 </ul>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/2019/09/07/Raft浅谈/progress_1.png" alt="等待 leader" title="">
-                </div>
-                <div class="image-caption">等待 leader</div>
-            </figure>      
-<p><img src="/2019/09/07/Raft浅谈/progress_2.png" alt="S1 成为 candidate"><br><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/2019/09/07/Raft浅谈/progress_3.png" alt="投票且 S2 成为 candidate" title="">
-                </div>
-                <div class="image-caption">投票且 S2 成为 candidate</div>
-            </figure><br><img src="/2019/09/07/Raft浅谈/progress_4.png" alt="S1 当选为 leader"></p>
+<div style="text-align: center;"><br>    <img src="/2019/09/07/Raft浅谈/progress_1.png" width="280">&nbsp;&nbsp;<br>    <img src="/2019/09/07/Raft浅谈/progress_2.png" width="280"><br></div><br><div style="text-align: center;"><br>    <img src="/2019/09/07/Raft浅谈/progress_3.png" width="280">&nbsp;&nbsp;<br>    <img src="/2019/09/07/Raft浅谈/progress_4.png" width="280"><br></div>
+
 <ul>
 <li><strong>选举 RPC</strong>，会带有部分信息，如任期号</li>
 <li>选举结果：自己是 leader；别的节点是 leader；超时没选出来</li>
@@ -325,13 +308,8 @@
 <ul>
 <li>流程：客户端发起指令日志 <br>–&gt; leader 存储日志并发送复制RPC给其他节点（通信存在问题，会不断进行尝试） <br>–&gt; 被安全复制后，leader 将其执行到自身的状态机，返回结果给客户端 <br>–&gt; 其他节点执行</li>
 </ul>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/2019/09/07/Raft浅谈/leader_copy.png" alt="日志复制" title="">
-                </div>
-                <div class="image-caption">日志复制</div>
-            </figure>
+<div style="text-align: center;"><br>    <img src="/2019/09/07/Raft浅谈/leader_copy.png" width="450"><br></div>
+
 <ul>
 <li>日志有序号，有创建时的任期号，有操作指令</li>
 <li>日志复制RPC，</li>
@@ -344,13 +322,8 @@
 <li>如果在不同的日志中的两个条目拥有相同的索引和任期号，那么他们之前的所有日志条目也全部相同</li>
 </ul>
 <h4 id="leader-崩溃带来的问题"><a href="#leader-崩溃带来的问题" class="headerlink" title="leader 崩溃带来的问题"></a>leader 崩溃带来的问题</h4><p>follower 可能有当前 leader 有的条目，也可能缺少当前 leader 部分条目，也可能兼有。如下一种情况：</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/2019/09/07/Raft浅谈/complex.png" alt="leader 崩溃带来的问题" title="">
-                </div>
-                <div class="image-caption">leader 崩溃带来的问题</div>
-            </figure>
+<div style="text-align: center;"><br>    <img src="/2019/09/07/Raft浅谈/complex.png" width="450"><br></div>
+
 <p>可能产生这样的原因是：f 当选为 leader，写入日志后没有成功复制就崩溃了；很快 f 机器又重启了，又再次被选为 leader，写入日志后又再次崩溃了，之后是 e，等等。最终会造成上图的结果。leader 是第一行的机器，任期为8。<br><br><br><strong>解决办法</strong><br>强制 follower 直接复制 leader 的日志。</p>
 <ul>
 <li>leader 从日志最后一条开始往前找，一个对应其他follower的 nextIndex[] 数组维护，初始为leader尾index+1；</li>
@@ -369,7 +342,8 @@
 <ul>
 <li>实际上确实是这样的</li>
 </ul>
-<h4 id="2-提交之前任期内的日志"><a href="#2-提交之前任期内的日志" class="headerlink" title="2. 提交之前任期内的日志"></a>2. 提交之前任期内的日志</h4><p><img src="/2019/09/07/Raft浅谈/commit_in_current_term.png" width="450" align="center"></p>
+<h4 id="2-提交之前任期内的日志"><a href="#2-提交之前任期内的日志" class="headerlink" title="2. 提交之前任期内的日志"></a>2. 提交之前任期内的日志</h4><div style="text-align: center;"><br>    <img src="/2019/09/07/Raft浅谈/commit_in_current_term.png" width="450"><br></div>
+
 <p>考虑如上问题。S1作为 leader，任期为2，复制到S2后崩溃；再次选举，S5获选为leader，任期为3，写入自身日志后崩溃；再次选举，S1的末尾日志是最新的，可以获选为leader，任期为4，此时将自己的日志复制到了S3，保证了大多数节点都复制了日志。<br><br><br><strong>这里问题来了：此时S1符合commit的条件，那么到底是提交呢还是不提交？</strong></p>
 <ul>
 <li>如果提交，情况为d。提交后，S1崩溃，此时集群中的节点最新的节点为S5（因为尾日志任期最新），并且会进行日志复制，这样的话，就会将之前的任期为2的日志覆盖！这样的话，集群中的节点部分就会缺失term 2的操作！</li>
@@ -406,7 +380,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2019-09-21T03:21:32.436Z" itemprop="dateUpdated">2019-09-21 03:21:32</time>
+    最后更新时间：<time datetime="2019-09-21T03:36:11.501Z" itemprop="dateUpdated">2019-09-21 03:36:11</time>
 </span><br>
 
 
