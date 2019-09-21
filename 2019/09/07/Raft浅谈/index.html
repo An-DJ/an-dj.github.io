@@ -38,7 +38,7 @@
 <meta property="og:image" content="http://andj.me/2019/09/07/Raft浅谈/leader_copy.png">
 <meta property="og:image" content="http://andj.me/2019/09/07/Raft浅谈/complex.png">
 <meta property="og:image" content="http://andj.me/2019/09/07/Raft浅谈/commit_in_current_term.png">
-<meta property="og:updated_time" content="2019-09-21T04:00:43.101Z">
+<meta property="og:updated_time" content="2019-09-21T04:05:55.338Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Raft浅谈">
 <meta name="twitter:description" content="分布式一致性(Distributed Consensus)What 分布式环境：复杂，Some of the processes (agents) may fail or be unreliable in other ways 一致性：requires agreement among a number of processes (or agents) for a single data value">
@@ -182,7 +182,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#分布式一致性-Distributed-Consensus"><span class="post-toc-number">1.</span> <span class="post-toc-text">分布式一致性(Distributed Consensus)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#What"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">What</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#领导选举-leader-election"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">领导选举 leader election</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#日志复制-log-replication"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">日志复制 log replication</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#leader-崩溃带来的问题"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">leader 崩溃带来的问题</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安全性-safety"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">安全性 safety</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-选举限制"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">1. 选举限制</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-提交之前任期内的日志"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text">2. 提交之前任期内的日志</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#客户端交互"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">客户端交互</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Have-a-try"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">Have a try</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考"><span class="post-toc-number">2.</span> <span class="post-toc-text">参考</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#分布式一致性-Distributed-Consensus"><span class="post-toc-number">1.</span> <span class="post-toc-text">分布式一致性(Distributed Consensus)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#What"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">What</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Description"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Description</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Where"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">Where</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一致性协议-Consensus-Protocol"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">一致性协议(Consensus Protocol)</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Paxos"><span class="post-toc-number">2.</span> <span class="post-toc-text">Paxos</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Raft"><span class="post-toc-number">3.</span> <span class="post-toc-text">Raft</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#复制状态机-Replicated-state-machines"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">复制状态机 Replicated state machines</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Raft-基础"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">Raft 基础</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#领导选举-leader-election"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">领导选举 leader election</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#日志复制-log-replication"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">日志复制 log replication</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#leader-崩溃带来的问题"><span class="post-toc-number">3.4.1.</span> <span class="post-toc-text">leader 崩溃带来的问题</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安全性-safety"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">安全性 safety</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-选举限制"><span class="post-toc-number">3.5.1.</span> <span class="post-toc-text">1. 选举限制</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-提交之前任期内的日志"><span class="post-toc-number">3.5.2.</span> <span class="post-toc-text">2. 提交之前任期内的日志</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#客户端交互"><span class="post-toc-number">3.6.</span> <span class="post-toc-text">客户端交互</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Have-a-try"><span class="post-toc-number">3.7.</span> <span class="post-toc-text">Have a try</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考"><span class="post-toc-number">4.</span> <span class="post-toc-text">参考</span></a></li></ol>
         </nav>
     </aside>
 
@@ -210,20 +210,72 @@
 <li>一致性：requires agreement among a number of processes (or agents) for a single data value</li>
 <li>单个节点（数据副本）更新，所有节点数据也要相应更新。</li>
 </ul>
-<div style="text-align: center;"><br>    <img src="/2019/09/07/Raft浅谈/consensus.png" width="450"><br></div><br><br><br>### Description<br><br><strong>Termination</strong><br><br>Eventually, every correct process decides some value.<br><br><strong>Integrity</strong> ( <em>be honest</em> )<br><br>If all the correct processes proposed the same value <strong>v</strong>, then any correct process must decide <strong>v</strong>.<br><br><strong>Agreement</strong><br><br>Every correct process must agree on the same value.<br><br>### Where<br><br>- Leader election / Mutual Exclusion<br>- Commit or Abort in distributed transactions<br>- Reaching agreement about which process has failed<br>- Clock phase synchronization<br><br>### 一致性协议(Consensus Protocol)<br><br>- 2PC (Two-Phase Commit)<br>- 3PC (Three-Phase Commit)<br>- Paxos and its variants<br>- Chubby<br>- ZAB (ZooKeeper Atomic Broadcast)<br>- Raft<br>- …<br><br>## Paxos<br><br>- Lamport 提出的一种基于消息传递的分布式一致性算法<br>- <em>The Part-Time Parliament, 1998</em>，首篇论文，以故事性叙述（同行表示看不懂）<br>- <em>Paxos Made Simple, 2001</em>，再篇，算法描述（表示仍然看不懂）<br>- too difficult to understand and implement<br>- 产生了许多结合实际的衍生实现<br><br>## Raft<br><br>- 论文: <em>In Search of an Understandable Consensus Algorithm (Extended Version)</em><br>- 基于日志复制 ( replicated log )<br>- 简单，易懂，易于实现，这是 Raft 的研究目的<br>- Stanford 调查发现，对于学生，Raft 算法比 Paxos 更加易于学习<br>- 3 part: <strong>leader election, log replication, and safety</strong><br><br>### 复制状态机 Replicated state machines<br><figure class="image-bubble">
+<p><div style="text-align: center;"><br>    <img src="/2019/09/07/Raft浅谈/consensus.png" width="450"><br></div><br></p>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p><strong>Termination</strong></p>
+<p>Eventually, every correct process decides some value.</p>
+<p><strong>Integrity</strong> ( <em>be honest</em> )</p>
+<p>If all the correct processes proposed the same value <strong>v</strong>, then any correct process must decide <strong>v</strong>.</p>
+<p><strong>Agreement</strong></p>
+<p>Every correct process must agree on the same value.</p>
+<h3 id="Where"><a href="#Where" class="headerlink" title="Where"></a>Where</h3><ul>
+<li>Leader election / Mutual Exclusion</li>
+<li>Commit or Abort in distributed transactions</li>
+<li>Reaching agreement about which process has failed</li>
+<li>Clock phase synchronization</li>
+</ul>
+<h3 id="一致性协议-Consensus-Protocol"><a href="#一致性协议-Consensus-Protocol" class="headerlink" title="一致性协议(Consensus Protocol)"></a>一致性协议(Consensus Protocol)</h3><ul>
+<li>2PC (Two-Phase Commit)</li>
+<li>3PC (Three-Phase Commit)</li>
+<li>Paxos and its variants</li>
+<li>Chubby</li>
+<li>ZAB (ZooKeeper Atomic Broadcast)</li>
+<li>Raft</li>
+<li>…</li>
+</ul>
+<h2 id="Paxos"><a href="#Paxos" class="headerlink" title="Paxos"></a>Paxos</h2><ul>
+<li>Lamport 提出的一种基于消息传递的分布式一致性算法</li>
+<li><em>The Part-Time Parliament, 1998</em>，首篇论文，以故事性叙述（同行表示看不懂）</li>
+<li><em>Paxos Made Simple, 2001</em>，再篇，算法描述（表示仍然看不懂）</li>
+<li>too difficult to understand and implement</li>
+<li>产生了许多结合实际的衍生实现</li>
+</ul>
+<h2 id="Raft"><a href="#Raft" class="headerlink" title="Raft"></a>Raft</h2><ul>
+<li>论文: <em>In Search of an Understandable Consensus Algorithm (Extended Version)</em></li>
+<li>基于日志复制 ( replicated log )</li>
+<li>简单，易懂，易于实现，这是 Raft 的研究目的</li>
+<li>Stanford 调查发现，对于学生，Raft 算法比 Paxos 更加易于学习</li>
+<li>3 part: <strong>leader election, log replication, and safety</strong></li>
+</ul>
+<h3 id="复制状态机-Replicated-state-machines"><a href="#复制状态机-Replicated-state-machines" class="headerlink" title="复制状态机 Replicated state machines"></a>复制状态机 Replicated state machines</h3><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="/2019/09/07/Raft浅谈/replicated_machine.png" alt="复制状态机" title="">
                 </div>
                 <div class="image-caption">复制状态机</div>
-            </figure><br><br>- 一致性算法管理来自客户端指令的复制日志<br>- 状态机从日志中处理相同顺序的相同指令，所以产生的结果一致<br>- 保证复制日志相同 –&gt; 保证一致性<br><br>### Raft 基础<br><br>- Raft 集群中包含若干节点，通常是5个<br>- 半数以上的节点存活，保持可用性<br>- 节点角色状态机（3种角色）<br><br><figure class="image-bubble">
+            </figure>  
+<ul>
+<li>一致性算法管理来自客户端指令的复制日志</li>
+<li>状态机从日志中处理相同顺序的相同指令，所以产生的结果一致</li>
+<li>保证复制日志相同 –&gt; 保证一致性</li>
+</ul>
+<h3 id="Raft-基础"><a href="#Raft-基础" class="headerlink" title="Raft 基础"></a>Raft 基础</h3><ul>
+<li>Raft 集群中包含若干节点，通常是5个</li>
+<li>半数以上的节点存活，保持可用性</li>
+<li>节点角色状态机（3种角色）</li>
+</ul>
+<figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="/2019/09/07/Raft浅谈/role.png" alt="role 状态机" title="">
                 </div>
                 <div class="image-caption">role 状态机</div>
-            </figure><br><br>- 通常情况下，系统中只有一个 leader ，其他都是 follower<br>- 如果客户端与其中一个 follower，其会请求重定向<br>- 领导人任期<br><br><div style="text-align: center;"><br>    <img src="/2019/09/07/Raft浅谈/terms.png" width="450"><br></div>
-
+            </figure>
+<ul>
+<li>通常情况下，系统中只有一个 leader ，其他都是 follower</li>
+<li>如果客户端与其中一个 follower，其会请求重定向</li>
+<li>领导人任期</li>
+</ul>
+<p><div style="text-align: center;"><br>    <img src="/2019/09/07/Raft浅谈/terms.png" width="450"><br></div><br></p>
 <ul>
 <li>每一段任期都是从一次选举开始，任期内 leader 唯一且发挥作用</li>
 <li>任期是一种逻辑时钟，任期号单调增</li>
@@ -234,8 +286,7 @@
 <ul>
 <li>心跳机制：候选人拉票，半数以上赞同即成为下一任 leader</li>
 </ul>
-<div style="text-align: center;"><br>    <img src="/2019/09/07/Raft浅谈/progress_1.png" width="280">&nbsp;&nbsp;<br>    <img src="/2019/09/07/Raft浅谈/progress_2.png" width="280"><br></div><br><div style="text-align: center;"><br>    <img src="/2019/09/07/Raft浅谈/progress_3.png" width="280">&nbsp;&nbsp;<br>    <img src="/2019/09/07/Raft浅谈/progress_4.png" width="280"><br></div>
-
+<p><div style="text-align: center;"><br>    <img src="/2019/09/07/Raft浅谈/progress_1.png" width="280"><br>    <img src="/2019/09/07/Raft浅谈/progress_2.png" width="280"><br>    <img src="/2019/09/07/Raft浅谈/progress_3.png" width="280"><br>    <img src="/2019/09/07/Raft浅谈/progress_4.png" width="280"><br></div><br></p>
 <ul>
 <li><strong>选举 RPC</strong>，会带有部分信息，如任期号</li>
 <li>选举结果：自己是 leader；别的节点是 leader；超时没选出来</li>
@@ -318,7 +369,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2019-09-21T04:00:43.101Z" itemprop="dateUpdated">2019-09-21 04:00:43</time>
+    最后更新时间：<time datetime="2019-09-21T04:05:55.338Z" itemprop="dateUpdated">2019-09-21 04:05:55</time>
 </span><br>
 
 
