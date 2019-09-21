@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Assignment for Stanford CS143:Compilers | 泡壶Java | 浸透人生</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="cs143,compiler,cool,assignment">
+    <meta name="description" content="Preface&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;大三上半年这个学期,学校开设了编译原理这门课程,使用的是 Stanford  CS143这门课的课件来教授.尽管如此,因为课时的原因,很多关于这门课的精华部分点到为止,而且这门课最具特色的实习我们也没有完成.这个假期,我想找空闲时间,完成这门课程的5次实习,把自己学习到的编译原理的知识应用">
+<meta name="keywords" content="cs143,compiler,cool,assignment">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Assignment for Stanford CS143:Compilers">
+<meta property="og:url" content="http://andj.me/2019/01/20/Assignment-for-Stanford-cs143-Compilers/index.html">
+<meta property="og:site_name" content="泡壶Java">
+<meta property="og:description" content="Preface&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;大三上半年这个学期,学校开设了编译原理这门课程,使用的是 Stanford  CS143这门课的课件来教授.尽管如此,因为课时的原因,很多关于这门课的精华部分点到为止,而且这门课最具特色的实习我们也没有完成.这个假期,我想找空闲时间,完成这门课程的5次实习,把自己学习到的编译原理的知识应用">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://andj.me/2019/01/20/Assignment-for-Stanford-cs143-Compilers/code.png">
+<meta property="og:image" content="http://andj.me/2019/01/20/Assignment-for-Stanford-cs143-Compilers/result.png">
+<meta property="og:updated_time" content="2019-09-07T05:20:46.738Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Assignment for Stanford CS143:Compilers">
+<meta name="twitter:description" content="Preface&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;大三上半年这个学期,学校开设了编译原理这门课程,使用的是 Stanford  CS143这门课的课件来教授.尽管如此,因为课时的原因,很多关于这门课的精华部分点到为止,而且这门课最具特色的实习我们也没有完成.这个假期,我想找空闲时间,完成这门课程的5次实习,把自己学习到的编译原理的知识应用">
+<meta name="twitter:image" content="http://andj.me/2019/01/20/Assignment-for-Stanford-cs143-Compilers/code.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="泡壶Java" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/AnDJ.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/AnDJ.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">AnDJ</h5>
+          <a href="mailto:aptx1376432332@gmail.com" title="aptx1376432332@gmail.com" class="mail">aptx1376432332@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/An-DJ" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/An_DJ" target="_blank">
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom">
+                <i class="icon icon-lg icon-link"></i>
+                twitter
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Assignment for Stanford CS143:Compilers</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Assignment for Stanford CS143:Compilers</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-01-20T10:50:38.000Z" itemprop="datePublished" class="page-time">
+  2019-01-20
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Preface"><span class="post-toc-number">1.</span> <span class="post-toc-text">Preface</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Introduction-to-Stanford-CS143"><span class="post-toc-number">2.</span> <span class="post-toc-text">Introduction to Stanford CS143</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Cool-Language"><span class="post-toc-number">3.</span> <span class="post-toc-text">Cool Language</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#About-Assignment"><span class="post-toc-number">4.</span> <span class="post-toc-text">About Assignment</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#The-End"><span class="post-toc-number">5.</span> <span class="post-toc-text">The End</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Assignment-for-Stanford-cs143-Compilers" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Assignment for Stanford CS143:Compilers</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-01-20 10:50:38" datetime="2019-01-20T10:50:38.000Z" itemprop="datePublished">2019-01-20</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="Preface"><a href="#Preface" class="headerlink" title="Preface"></a>Preface</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;大三上半年这个学期,学校开设了编译原理这门课程,使用的是 <em>Stanford</em>  <a href="http://web.stanford.edu/class/cs143/" target="_blank" rel="noopener">CS143</a>这门课的课件来教授.尽管如此,因为课时的原因,很多关于这门课的精华部分点到为止,而且这门课最具特色的实习我们也没有完成.这个假期,我想找空闲时间,完成这门课程的5次实习,把自己学习到的编译原理的知识应用一下.</p>
+<h3 id="Introduction-to-Stanford-CS143"><a href="#Introduction-to-Stanford-CS143" class="headerlink" title="Introduction to Stanford CS143"></a>Introduction to Stanford CS143</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这门课程在 <em>Coursera</em> 上也有公开课程,不过我这里还是使用了 <em>Stanford</em> 课程官网上的课件来学习.这门课程的历史很久, <em>Assignment</em> 也在不断变化,之前的课程(2012年之前)要求实现的是一种名叫’ <em>Decaf</em> ‘的语言,可以找到相应的学习资料在该<a href="https://web.stanford.edu/class/archive/cs/cs143/cs143.1128/" target="_blank" rel="noopener">历史网址</a>,后面课程更新后,实现的是一种名叫 <em>Cool</em> 的语言.关于这门语言的介绍在<a href="https://en.wikipedia.org/wiki/Cool_(programming_language" target="_blank" rel="noopener">Wikipedia</a>)和<a href="http://theory.stanford.edu/~aiken/software/cool/cool.html" target="_blank" rel="noopener">语言官网</a>上可以找到. </p>
+<h3 id="Cool-Language"><a href="#Cool-Language" class="headerlink" title="Cool Language"></a>Cool Language</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <em>Wikipedia</em> 上针对 <em>Cool</em> 语言的解释为: <em>an acronym for Classroom Object Oriented Language, is a computer programming language designed by Alexander Aiken for use in an undergraduate compiler course project.</em>  即是一种用于教学使用的面向对象语言.对于该门语言官网上解释来说,  <em>Cool is a small language designed for use in an undergraduate compiler course project. While small enough for a one term project, Cool still has many of the features of modern programming languages(有很多现代编程语言的特点), including objects(对象), automatic memory management(动态内存管理), and strong static typing(强静态类型). Cool is built entirely on public domain tools; it generates code for a MIPS simulator, spim (产生MIPS汇编代码). Thus, the project should port easily to other platforms(跨平台). The project has been used for teaching compilers at many institutions and the software is stable.</em> </p>
+<h3 id="About-Assignment"><a href="#About-Assignment" class="headerlink" title="About Assignment"></a>About Assignment</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;官网上给出了 <em>Cool</em> 语言的各种介绍链接,包含针对于 <em>assignment</em> 需要使用的工具文档,如 <em>Flex,Bison</em> .该课程包含5次 <em>program assignment</em> ,分块实现 <em>Cool</em> 语言. <em>Stanford</em> 针对上机教学环境有自己搭建的教学资源服务器,很多需要的软件运行环境我们是访问不到的,需要自己手动配置.不过,针对于这门课放出了<a href="https://lagunita.stanford.edu/courses/Engineering/Compilers/Fall2014/6b750292e90d4950b895f621a5671b49/" target="_blank" rel="noopener">软件运行环境</a>供我们下载使用.该资源为 <em>virtual box</em> 虚拟机,环境系统为Linux,关于课程所需要的环境已经部署好,我们可以将文件copy至virtual box打开,使用虚拟机完成实习.对我来说的话,本身有现成的Linux环境,虚拟机太慢了,我直接从虚拟机中将文件copy出来放在自己的Linux系统中(给出的Linux虚拟环境太老了,很多https网站内置浏览器不能访问,实在是满足不了需求).当然,环境迁移的教程官网上都有详细说明.</p>
+<h3 id="The-End"><a href="#The-End" class="headerlink" title="The End"></a>The End</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;目前环境已经搭建完毕,紧接着按5次 <em>assignment</em> 来实现.后面的文章分块儿讲述自己的实现过程,也是在不断地督促自己高效率完成.新的学习任务,给自己一点动力,用 <em>Cool</em> 语言写一句祝福为自己加油打气:</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2019/01/20/Assignment-for-Stanford-cs143-Compilers/code.png" alt="code" title="">
+                </div>
+                <div class="image-caption">code</div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2019/01/20/Assignment-for-Stanford-cs143-Compilers/result.png" alt="result" title="">
+                </div>
+                <div class="image-caption">result</div>
+            </figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-09-07T05:20:46.738Z" itemprop="dateUpdated">2019-09-07 05:20:46</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例:<a href="/2019/01/20/Assignment-for-Stanford-cs143-Compilers/" target="_blank" rel="external">http://andj.me/2019/01/20/Assignment-for-Stanford-cs143-Compilers/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://andj.me">
+            <img src="/img/AnDJ.png" alt="AnDJ">
+            AnDJ
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/assignment/">assignment</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/compiler/">compiler</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cool/">cool</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cs143/">cs143</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://andj.me/2019/01/20/Assignment-for-Stanford-cs143-Compilers/&title=《Assignment for Stanford CS143:Compilers》 — 泡壶Java&pic=http://andj.me/img/AnDJ.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://andj.me/2019/01/20/Assignment-for-Stanford-cs143-Compilers/&title=《Assignment for Stanford CS143:Compilers》 — 泡壶Java&source=写一写-from AnDJ" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://andj.me/2019/01/20/Assignment-for-Stanford-cs143-Compilers/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Assignment for Stanford CS143:Compilers》 — 泡壶Java&url=http://andj.me/2019/01/20/Assignment-for-Stanford-cs143-Compilers/&via=http://andj.me" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://andj.me/2019/01/20/Assignment-for-Stanford-cs143-Compilers/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/02/18/6-828-2018-Lecture-1-O-S-overview/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">6.828-2018-Lecture-1:O/S overview</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/12/25/搭建多端编写hexo博客环境/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">搭建多端编写hexo博客环境</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        多谢捧场~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>AnDJ &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">晋ICP备17005941号</a><br>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://andj.me/2019/01/20/Assignment-for-Stanford-cs143-Compilers/&title=《Assignment for Stanford CS143:Compilers》 — 泡壶Java&pic=http://andj.me/img/AnDJ.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://andj.me/2019/01/20/Assignment-for-Stanford-cs143-Compilers/&title=《Assignment for Stanford CS143:Compilers》 — 泡壶Java&source=写一写-from AnDJ" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://andj.me/2019/01/20/Assignment-for-Stanford-cs143-Compilers/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Assignment for Stanford CS143:Compilers》 — 泡壶Java&url=http://andj.me/2019/01/20/Assignment-for-Stanford-cs143-Compilers/&via=http://andj.me" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://andj.me/2019/01/20/Assignment-for-Stanford-cs143-Compilers/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACvUlEQVR42u3awWrkMBAE0Pn/n569LuzarlJLwYHnUwiOx08BdU+1Pp/4+v5z5XdeXfn9f9/5OXHh4eHhjV/9/iWufrO2NFdPuL8zeWc8PDy807z7D7j6sDXe1ZPbO5NFwcPDw3sDL9/c18rPfSnCw8PD+4289p6E3bbjeHh4eG/grbWz7VaetOb5Um7OWvDw8PBiXrt9v+HnI/M9PDw8vPFUPRlctcOtPLZoi8F/3gQPDw/vAG8SwuYN8VqrnRw7uL8fDw8P7+d5eUzQUidtdB5w4OHh4f0ML9/i25ggP/yalIrNOQoeHh7eIO3cFgEE7fI8d63ne3h4eHhjXjt6nwzsJ0e41uJgPDw8vNO89qv+vDwkUUJyFCya7+Hh4eFt4q0N9dvycP9Cuw4iPLw/Hh4e3ibe2ph/sijJZ7WHCYpigIeHhzfmtdvukQ/eNMN6WG48PDy8rby2wW3Lw9rT5g06Hh4e3jlesvV/t14nhmr1rA8PDw9viZdv6PPf5MewkpIQ/WPw8PDwjvHa0DYHrD0hf87DvwQPDw/vAG9xw41fd1eA25YcPDw8vHO8IgYtW+28mW5ji6IRx8PDwzvAa9vTPGJoC0O+uPmi4+Hh4Z3gtZtvO9rPjw5MwovFc2R4eHh4S7y1wpAHEJO2OF+Oh4KEh4eHd4w3GYblccPiK5axxWdeW/Dw8PDinrMNIPKQYhJMtEXisu7h4eHhHeC10Wo+PGtj320RMB4eHt5W3re88u24Ba/FwQ9/i4eHh3eANxnMJ6HDrqZ81/ECPDw8vF28yUbfNtBrhSc/ZFA31nh4eHgDXhtG5NFtsom3UW/RTOPh4eG9gJdv0PkQa7KgDwuEh4eH9wJe+60/GXrljXJ9HAEPDw/vGG8y9Gq3+3y4tbaseHh4eKd5a1/yk+F9vq0nC7R5poeHh4e3wvsDgUtzqLLYOqAAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'leave';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'back';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
