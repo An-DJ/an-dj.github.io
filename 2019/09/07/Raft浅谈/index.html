@@ -38,7 +38,7 @@
 <meta property="og:image" content="http://andj.me/2019/09/07/Raft浅谈/leader_copy.png">
 <meta property="og:image" content="http://andj.me/2019/09/07/Raft浅谈/complex.png">
 <meta property="og:image" content="http://andj.me/2019/09/07/Raft浅谈/commit_in_current_term.png">
-<meta property="og:updated_time" content="2019-09-07T09:40:13.899Z">
+<meta property="og:updated_time" content="2019-09-21T03:21:32.436Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Raft浅谈">
 <meta name="twitter:description" content="分布式一致性(Distributed Consensus)What 分布式环境：复杂，Some of the processes (agents) may fail or be unreliable in other ways 一致性：requires agreement among a number of processes (or agents) for a single data value">
@@ -369,13 +369,7 @@
 <ul>
 <li>实际上确实是这样的</li>
 </ul>
-<h4 id="2-提交之前任期内的日志"><a href="#2-提交之前任期内的日志" class="headerlink" title="2. 提交之前任期内的日志"></a>2. 提交之前任期内的日志</h4><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/2019/09/07/Raft浅谈/commit_in_current_term.png" alt="是否提交之前任期内的日志" title="">
-                </div>
-                <div class="image-caption">是否提交之前任期内的日志</div>
-            </figure>
+<h4 id="2-提交之前任期内的日志"><a href="#2-提交之前任期内的日志" class="headerlink" title="2. 提交之前任期内的日志"></a>2. 提交之前任期内的日志</h4><p><img src="/2019/09/07/Raft浅谈/commit_in_current_term.png" width="450" align="center"></p>
 <p>考虑如上问题。S1作为 leader，任期为2，复制到S2后崩溃；再次选举，S5获选为leader，任期为3，写入自身日志后崩溃；再次选举，S1的末尾日志是最新的，可以获选为leader，任期为4，此时将自己的日志复制到了S3，保证了大多数节点都复制了日志。<br><br><br><strong>这里问题来了：此时S1符合commit的条件，那么到底是提交呢还是不提交？</strong></p>
 <ul>
 <li>如果提交，情况为d。提交后，S1崩溃，此时集群中的节点最新的节点为S5（因为尾日志任期最新），并且会进行日志复制，这样的话，就会将之前的任期为2的日志覆盖！这样的话，集群中的节点部分就会缺失term 2的操作！</li>
@@ -412,7 +406,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2019-09-07T09:40:13.899Z" itemprop="dateUpdated">2019-09-07 09:40:13</time>
+    最后更新时间：<time datetime="2019-09-21T03:21:32.436Z" itemprop="dateUpdated">2019-09-21 03:21:32</time>
 </span><br>
 
 
