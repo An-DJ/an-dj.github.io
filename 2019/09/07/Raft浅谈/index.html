@@ -38,7 +38,7 @@
 <meta property="og:image" content="http://andj.me/2019/09/07/Raft浅谈/leader_copy.png">
 <meta property="og:image" content="http://andj.me/2019/09/07/Raft浅谈/complex.png">
 <meta property="og:image" content="http://andj.me/2019/09/07/Raft浅谈/commit_in_current_term.png">
-<meta property="og:updated_time" content="2019-09-21T03:36:11.501Z">
+<meta property="og:updated_time" content="2019-09-21T03:56:06.428Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Raft浅谈">
 <meta name="twitter:description" content="分布式一致性(Distributed Consensus)What 分布式环境：复杂，Some of the processes (agents) may fail or be unreliable in other ways 一致性：requires agreement among a number of processes (or agents) for a single data value">
@@ -281,8 +281,7 @@
 <li>如果客户端与其中一个 follower，其会请求重定向</li>
 <li>领导人任期</li>
 </ul>
-<div style="text-align: center;"><br>    <img src="/2019/09/07/Raft浅谈/terms.png" width="450"><br></div>
-
+<p><span style="text-align: center;"><br>    <img src="/2019/09/07/Raft浅谈/terms.png" width="450"><br></span></p>
 <ul>
 <li>每一段任期都是从一次选举开始，任期内 leader 唯一且发挥作用</li>
 <li>任期是一种逻辑时钟，任期号单调增</li>
@@ -293,8 +292,7 @@
 <ul>
 <li>心跳机制：候选人拉票，半数以上赞同即成为下一任 leader</li>
 </ul>
-<div style="text-align: center;"><br>    <img src="/2019/09/07/Raft浅谈/progress_1.png" width="280">&nbsp;&nbsp;<br>    <img src="/2019/09/07/Raft浅谈/progress_2.png" width="280"><br></div><br><div style="text-align: center;"><br>    <img src="/2019/09/07/Raft浅谈/progress_3.png" width="280">&nbsp;&nbsp;<br>    <img src="/2019/09/07/Raft浅谈/progress_4.png" width="280"><br></div>
-
+<p><span style="text-align: center;"><br>    <img src="/2019/09/07/Raft浅谈/progress_1.png" width="280">&nbsp;&nbsp;<br>    <img src="/2019/09/07/Raft浅谈/progress_2.png" width="280"><br></span><br><span style="text-align: center;"><br>    <img src="/2019/09/07/Raft浅谈/progress_3.png" width="280">&nbsp;&nbsp;<br>    <img src="/2019/09/07/Raft浅谈/progress_4.png" width="280"><br></span></p>
 <ul>
 <li><strong>选举 RPC</strong>，会带有部分信息，如任期号</li>
 <li>选举结果：自己是 leader；别的节点是 leader；超时没选出来</li>
@@ -380,7 +378,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2019-09-21T03:36:11.501Z" itemprop="dateUpdated">2019-09-21 03:36:11</time>
+    最后更新时间：<time datetime="2019-09-21T03:56:06.428Z" itemprop="dateUpdated">2019-09-21 03:56:06</time>
 </span><br>
 
 
